@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You ❤️</title>
+  <style>
+    body { background-color: #ffe6ea; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+    .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 85%; max-width: 350px; }
+    .btn { padding: 12px 24px; font-size: 16px; border: none; border-radius: 20px; cursor: pointer; margin: 8px; font-weight: bold; transition: all 0.2s; }
+    #yesBtn { background-color: #ff4d6d; color: white; }
+    #noBtn { background-color: #cccccc; color: black; }
+    .hidden { display: none; }
+    .letter { background: #fff0f3; padding: 20px; border-radius: 10px; border: 1px solid #ffb3c1; text-align: left; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <div id="mainCard" class="card">
+    <img id="gifImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW93cnNwbHRycWFmbWhseXVzeXpzaTJwYzY3OXBmNzAyc3JtdWZ5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9IbxxvDUQM/giphy.gif" width="120">
+    <h2 id="questionText">ငါတို့ တစ်ခေါက် ပြန်တွဲကြမလား? ❤️</h2>
+    <button id="yesBtn" class="btn" onclick="openLetter()">Yes</button>
+    <button id="noBtn" class="btn" onclick="nextQuestion()">No</button>
+  </div>
+
+  <div id="letterCard" class="card hidden">
+    <div class="letter">
+      <h3 style="color:#ff4d6d; text-align:center;">Confession Letter 💌</h3>
+      <p>မင်းနဲ့ ပြန်တွဲရရင် အရမ်းဝမ်းသာမှာပါ။ အရင်ကထက်လည်း ပိုပြီး ဂရုစိုက် စာနာပေးပါ့မယ်... ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { text: "ငါတို့ တစ်ခေါက် ပြန်တွဲကြမလား? ❤️", yesText: "Yes", noText: "No" },
+      { text: "သေချာလို့လား? တကယ်မတွဲချင်တော့ဘူးလား? 🥺", yesText: "Yes", noText: "တကယ် မတွဲဘူး" },
+      { text: "မုန့်ဝယ်ကျွေးရင်ရော ပြန်တွဲမှာလား? 🍕", yesText: "Yes", noText: "မတွဲပါဘူးဆို" },
+      { text: "နဲနဲလေးမှ မချစ်တော့ဘူးလား? 💔", yesText: "Yes", noText: "ဟင့်အင်း" },
+      { text: "ခဏလောက် ပြန်စဉ်းစားပါဦးနော်... 🥺❤️", yesText: "Yes", noText: "Yes" }
+    ];
+
+    let currentStep = 0;
+
+    function nextQuestion() {
+      if (currentStep === questions.length - 1) {
+        openLetter();
+        return;
+      }
+
+      currentStep++;
+      document.getElementById('questionText').innerText = questions[currentStep].text;
+      document.getElementById('yesBtn').innerText = questions[currentStep].yesText;
+      document.getElementById('noBtn').innerText = questions[currentStep].noText;
+
+      if (currentStep === questions.length - 1) {
+        const noBtn = document.getElementById('noBtn');
+        noBtn.style.backgroundColor = "#ff4d6d";
+        noBtn.style.color = "white";
+        noBtn.onclick = openLetter;
+      }
+    }
+
+    function openLetter() {
+      document.getElementById('mainCard').classList.add('hidden');
+      document.getElementById('letterCard').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
